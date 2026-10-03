@@ -28,3 +28,36 @@ def calculate_risk_score(event):
         "risk_score": score,
         "severity": severity
     }
+
+
+def calculate_incident_risk(incident):
+    events = incident.get("events", [])
+
+    if not events:
+        return {
+            "risk_score": 0,
+            "severity": "Low"
+        }
+
+    scores = [
+        event.get("risk", {}).get("risk_score", 0)
+        for event in events
+    ]
+
+    total_score = sum(scores)
+
+    risk_score = min(total_score, 100)
+
+    if risk_score >= 81:
+        severity = "Critical"
+    elif risk_score >= 61:
+        severity = "High"
+    elif risk_score >= 31:
+        severity = "Medium"
+    else:
+        severity = "Low"
+
+    return {
+        "risk_score": risk_score,
+        "severity": severity
+    }
