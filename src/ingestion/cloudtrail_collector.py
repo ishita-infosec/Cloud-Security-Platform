@@ -5,7 +5,7 @@ from src.normalization.cloudtrail_normalizer import normalize_event
 from src.detection.cloudtrail_detector import detect_event
 from src.correlation.incident_correlator import correlate_events
 from src.risk.risk_scorer import calculate_risk_score, calculate_incident_risk
-
+from src.database.event_repository import save_event
 
 session = boto3.Session(
     profile_name="cloud-security-project"
@@ -46,6 +46,7 @@ for event in events:
         }
 
     processed_event["risk"] = risk
+    save_event(processed_event)
 
     processed_events.append(processed_event)
 

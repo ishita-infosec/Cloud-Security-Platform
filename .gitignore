@@ -1,15 +1,20 @@
-# Virtual environment
+# Python
 venv/
-.venv/
-
-# Python cache
 __pycache__/
-*.py[cod]
+*.pyc
 
-# Environment variables / secrets
+# Environment
 .env
-.env.*
-*.pem
 
-# AWS credentials
-.aws/
+# Database
+cloud_security.db
+
+# Node
+node_modules/
+dashboard/node_modules/
+
+# Build
+dashboard/dist/
+
+# IDE
+.vscode/
